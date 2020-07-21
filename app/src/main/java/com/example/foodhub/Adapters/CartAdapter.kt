@@ -13,7 +13,7 @@ import java.util.*
 
 class CartAdapter(val context: Context,val list:List<Object?> ):RecyclerView.Adapter<CartAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_cart_item_single_row,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_cart_item_single_row ,parent,false)
         return CartAdapter.ItemViewHolder(view)
     }
 
