@@ -14,6 +14,7 @@ import com.example.foodhub.Acitivity.FoodItemList
 import com.example.foodhub.Acitivity.MainActivity
 import com.example.foodhub.Acitivity.Welcome
 import com.example.foodhub.DBAsync.DBAsyncTaskRestList
+import com.example.foodhub.DBAsync.GetDBA
 import com.example.foodhub.Fragment.FavouriteFragment
 import com.example.foodhub.Fragment.HomeFragment
 import com.example.foodhub.R
@@ -48,7 +49,7 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
         )
         holder.llRest.setOnClickListener {
          //   notifyItemChanged(position,holder.favNotRes1)
-            Toast.makeText(context, "clicked", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "${rest.resName} Clicked ", Toast.LENGTH_LONG).show()
             val intent = Intent(context, FoodItemList::class.java)
             intent.putExtra("id", rest.resId)
             intent.putExtra("nameOfRes", rest.resName)
@@ -67,7 +68,7 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
 
         holder.favNotRes1.visibility=View.GONE
 
-     val async=DBAsyncTaskRestList(context,restName,1).execute().get()
+     val async=GetDBA.getDBAsyncTaskRestList(context,restName,1).execute().get()
 
         if(async) {
             holder.favNotRes1.visibility = View.VISIBLE
@@ -103,8 +104,8 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
 
 
 
-            if(!DBAsyncTaskRestList(context,restName,1).execute().get()){
-               val insert=DBAsyncTaskRestList(context,restName,2).execute().get()
+            if(!GetDBA.getDBAsyncTaskRestList(context,restName,1).execute().get()){
+               val insert=GetDBA.getDBAsyncTaskRestList(context,restName,2).execute().get()
                if(insert){
                holder.favNotRes1.visibility = View.VISIBLE
                }
@@ -114,7 +115,7 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
 
            }
             else{
-               val delete=DBAsyncTaskRestList(context,restName,3).execute().get()
+               val delete=GetDBA.getDBAsyncTaskRestList(context,restName,3).execute().get()
                if(delete){
                    holder.favNotRes1.visibility = View.GONE
                }

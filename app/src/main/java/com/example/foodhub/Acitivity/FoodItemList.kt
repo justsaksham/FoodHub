@@ -19,8 +19,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.foodhub.Adapters.ItemsRecyclerAdapter
+import com.example.foodhub.Adapters.getAdapter
 import com.example.foodhub.DBAsync.DBAsyncTaskFoodList
 import com.example.foodhub.DBAsync.DBAsyncTaskRestList
+import com.example.foodhub.DBAsync.GetDBA
 import com.example.foodhub.Fragment.FavouriteFragment
 import com.example.foodhub.Fragment.HomeFragment
 import com.example.foodhub.R
@@ -48,8 +50,7 @@ class FoodItemList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_item_list)
 
-
-        val h=DBAsyncTaskFoodList(this@FoodItemList,null,4).execute().get()
+        val h=GetDBA.getDBAsyncTaskFoodList(this@FoodItemList,null,4).execute().get()
 
         toolbar=findViewById(R.id.toolbar)
         layoutManager=LinearLayoutManager(this@FoodItemList)
@@ -89,7 +90,7 @@ class FoodItemList : AppCompatActivity() {
         favNotRes1.visibility=View.GONE
 
 
-        val async= DBAsyncTaskRestList(this@FoodItemList,rest,1).execute().get()
+        val async= GetDBA.getDBAsyncTaskRestList(this@FoodItemList,rest,1).execute().get()
 
         if(async) {
             favNotRes1.visibility = View.VISIBLE
@@ -100,8 +101,8 @@ class FoodItemList : AppCompatActivity() {
 
 
         favNotRes.setOnClickListener{
-            if(!DBAsyncTaskRestList(this@FoodItemList,rest,1).execute().get()){
-                val insert=DBAsyncTaskRestList(this@FoodItemList,rest,2).execute().get()
+            if(!GetDBA.getDBAsyncTaskRestList(this@FoodItemList,rest,1).execute().get()){
+                val insert=GetDBA.getDBAsyncTaskRestList(this@FoodItemList,rest,2).execute().get()
                 if(insert){
                     favNotRes1.visibility = View.VISIBLE
                 }
@@ -111,7 +112,7 @@ class FoodItemList : AppCompatActivity() {
 
             }
             else{
-                val delete=DBAsyncTaskRestList(this@FoodItemList,rest,3).execute().get()
+                val delete=GetDBA.getDBAsyncTaskRestList(this@FoodItemList,rest,3).execute().get()
                 if(delete){
                     favNotRes1.visibility = View.GONE
                 }
@@ -148,13 +149,11 @@ class FoodItemList : AppCompatActivity() {
                             itemList.add(food)
 
                             //add adapters
-                            itemsRecyclerAdapter = ItemsRecyclerAdapter(
+                            itemsRecyclerAdapter = getAdapter.getItemsRecyclerAdapter(
                                 this@FoodItemList,
                                 itemList,
-                                b,
-                                listOfCartItem,
-                                listOfItemId
-                            )
+                                b
+                                )
                             recyclerItems.adapter = itemsRecyclerAdapter
                             recyclerItems.layoutManager = layoutManager
                            // Toast.makeText(this@FoodItemList, "$food", Toast.LENGTH_LONG).show()
@@ -225,7 +224,7 @@ class FoodItemList : AppCompatActivity() {
 //    }
 
     override fun onBackPressed() {
-        val h=DBAsyncTaskFoodList(this@FoodItemList,null,4).execute().get()
+        val h=GetDBA.getDBAsyncTaskFoodList(this@FoodItemList,null,4).execute().get()
         finish()
         super.onBackPressed()
     }

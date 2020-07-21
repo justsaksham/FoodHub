@@ -23,6 +23,8 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.foodhub.Adapters.CartAdapter
 import com.example.foodhub.Adapters.ItemsRecyclerAdapter
+import com.example.foodhub.Adapters.getAdapter
+import com.example.foodhub.DBAsync.GetDBA
 import com.example.foodhub.DBAsync.Retreive
 import com.example.foodhub.R
 import com.example.foodhub.database.CartDatabase
@@ -60,46 +62,46 @@ class Cart : AppCompatActivity() {
       txtRestName.text="${txtRestName.text} ${rest.restName}"
 
       setupToolbar()
-      //for retrieving the data
-      val async= Retreive(this@Cart,"carts-db").execute()
+      //for retreiving the data
+      val async= GetDBA.getRetreive(this@Cart,"carts-db").execute()
       var list=async.get()
-      val cartAdapter=CartAdapter(this@Cart,list)
+      val cartAdapter=getAdapter.getCartAdapter(this@Cart,list)
       recyclerItems.adapter=cartAdapter
       recyclerItems.layoutManager=layoutManager
 
 
+      var sum:Int = 0
+      val json=JSONObject()
+      val jsonArray=JSONArray()
+      var j=0
+      var rest_id:String="ss"
+      for(i in list){
+          val items=i as CartEntity?
+          val jsonObject=JSONObject()
+          jsonObject.put("food_item_id",items?.food_id)
+          jsonArray.put(j,jsonObject)
+          j++;
+          rest_id=items!!.restId
+          val s:String?=(items?.foodCost)
+          sum=sum + s!!.toInt()
+      }
 
 
 
 
 
+      btnOrder.text="total value($sum)"
 
 
 
       btnOrder.setOnClickListener {
             if(ConnectionManager().checkConnectivity(this@Cart)) {
-            var sum:Int = 0
-            val json=JSONObject()
-            val jsonArray=JSONArray()
-            var j=0
-            var rest_id:String="ss"
-            for(i in list){
-                val items=i as CartEntity?
-                val jsonObject=JSONObject()
-                jsonObject.put("food_item_id",items?.food_id)
-                jsonArray.put(j,jsonObject)
-                j++;
-                rest_id=items!!.restId
-                val s:String?=(items?.foodCost)
-                sum=sum + s!!.toInt()
-            }
             val sharedPreferences=getSharedPreferences("FoodHub", Context.MODE_PRIVATE)
             val u_id=sharedPreferences.getString("user_id","sak")
             json.put("user_id",u_id)
             json.put("restaurant_id",rest_id)
             json.put("total_cost",sum.toString())
             json.put("food",jsonArray)
-            btnOrder.text="total value($sum)"
 
 
 

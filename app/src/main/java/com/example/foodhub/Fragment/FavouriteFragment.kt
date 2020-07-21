@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodhub.Acitivity.Welcome
 import com.example.foodhub.Adapters.HomeRecyclerAdapter
+import com.example.foodhub.Adapters.getAdapter
+import com.example.foodhub.DBAsync.GetDBA
 import com.example.foodhub.DBAsync.Retreive
 import com.example.foodhub.DBAsync.RetreiveRestList
 
@@ -50,7 +52,11 @@ class FavouriteFragment() : Fragment() {
         progressBar.visibility=View.VISIBLE
         progressLayout.visibility=View.VISIBLE
         listRes2= arrayListOf()
-        val async=RetreiveRestList(activity as Context,"carts_db").execute()
+
+
+
+        //getting values from db
+        val async=GetDBA.getRetreiveRestList(activity as Context,"carts_db").execute()
         listRes=async.get()
         if(listRes.isEmpty()){
             gone.visibility=View.VISIBLE
@@ -71,7 +77,7 @@ class FavouriteFragment() : Fragment() {
             progressBar.visibility=View.GONE
             progressLayout.visibility=View.GONE
 
-            recyclerAdapter = HomeRecyclerAdapter(activity as Context, listRes2)
+            recyclerAdapter = getAdapter.getHomeRecyclerAdapter(activity as Context, listRes2)
             recyclerView.adapter = recyclerAdapter
             recyclerView.layoutManager = layoutManager
 
@@ -84,8 +90,4 @@ class FavouriteFragment() : Fragment() {
         return view
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-
-        super.onViewStateRestored(savedInstanceState)
-    }
 }

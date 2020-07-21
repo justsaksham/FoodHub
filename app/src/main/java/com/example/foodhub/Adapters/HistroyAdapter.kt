@@ -29,7 +29,7 @@ class HistroyAdapter(val context:Context,val list:ArrayList<Histroy>):RecyclerVi
 
         holder.txtRestName.text=obj.restaurantName
         holder.txtDate.text=obj.orderPlacedAt
-        val adapter=HistroyListAdapter(context,obj.foodList )
+        val adapter=getAdapter.getHistroyListAdapter(context,obj.foodList )
         holder.recyclerView.adapter=adapter
         holder.recyclerView.layoutManager=LinearLayoutManager(context)
 

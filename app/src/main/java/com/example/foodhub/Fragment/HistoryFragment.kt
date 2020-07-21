@@ -18,6 +18,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.foodhub.Adapters.HistroyAdapter
+import com.example.foodhub.Adapters.getAdapter
 
 import com.example.foodhub.R
 import com.example.foodhub.model.FoodList
@@ -106,7 +107,7 @@ class HistoryFragment(val id:String) : Fragment() {
 
                                 )
                                 list.add(histroy)
-                                histroyAdapter= HistroyAdapter(activity as Context,list)
+                                histroyAdapter=getAdapter.getHistroyAdapter(activity as Context,list)
                                 recyclerView.adapter=histroyAdapter
                                 recyclerView.layoutManager=LinearLayoutManager(activity)
                             }

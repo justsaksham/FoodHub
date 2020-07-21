@@ -19,6 +19,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.foodhub.Adapters.HomeRecyclerAdapter
+import com.example.foodhub.Adapters.getAdapter
 
 import com.example.foodhub.R
 import com.example.foodhub.model.Restruant
@@ -101,7 +102,7 @@ class HomeFragment() : Fragment() {
                                     jsonResObject.getString("image_url")
                                 )
                                 listRes.add(restruantobj)
-                                recyclerAdapter= HomeRecyclerAdapter(activity as Context,listRes)
+                                recyclerAdapter= getAdapter.getHomeRecyclerAdapter(activity as Context,listRes)
                                 recyclerHome.adapter=recyclerAdapter
                                 recyclerHome.layoutManager=layoutManager
 //                                Toast.makeText(

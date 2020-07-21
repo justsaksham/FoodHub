@@ -14,16 +14,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.foodhub.Acitivity.Cart
 import com.example.foodhub.DBAsync.DBAsyncTaskFoodList
+import com.example.foodhub.DBAsync.GetDBA
 import com.example.foodhub.R
 import com.example.foodhub.database.CartDatabase
 import com.example.foodhub.database.CartEntity
 import com.example.foodhub.model.Food
 
-class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val b:View,val listOfCartItem:ArrayList<Food>,
-
-                           val listOfItemId:ArrayList<String>):RecyclerView.Adapter<ItemsRecyclerAdapter.ItemViewHolder>() {
-  // val listOfCartItem= arrayListOf<Food>()
-    //val listOfItemId= arrayListOf<String>()
+class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val b:View):RecyclerView.Adapter<ItemsRecyclerAdapter.ItemViewHolder>() {
+   val listOfCartItem= arrayListOf<Food>()
+    val listOfItemId= arrayListOf<String>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -48,7 +47,7 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
             ,food.foodCost.toString()
             ,food.RestId.toString()
         )
-        val async=DBAsyncTaskFoodList(context,cartEntity,1).execute()
+        val async=GetDBA.getDBAsyncTaskFoodList(context,cartEntity,1).execute()
         val success2=async.get()
         if(success2){
             val favColor = ContextCompat.getColor(context, R.color.btnchanged)
@@ -64,13 +63,13 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
 
             //val b:View=context.findViewById(R.id.btnProceedCart)
 
-            val async=DBAsyncTaskFoodList(context,cartEntity,1).execute()
+            val async=GetDBA.getDBAsyncTaskFoodList(context,cartEntity,1).execute()
             val success=async.get()
             Toast.makeText(context, "clicked $success", Toast.LENGTH_LONG).show()
             if (!success) {
                 listOfCartItem.add(food)
                 listOfItemId.add(value)
-                val async=DBAsyncTaskFoodList(context,cartEntity,2).execute()
+                val async=GetDBA.getDBAsyncTaskFoodList(context,cartEntity,2).execute()
                 val success1=async.get()
                 if(success1) {
                     val favColor = ContextCompat.getColor(context, R.color.btnchanged)
@@ -84,7 +83,7 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
             } else {
                 listOfCartItem.remove(food)
                 listOfItemId.remove(value)
-                val async=DBAsyncTaskFoodList(context,cartEntity,3).execute()
+                val async=GetDBA.getDBAsyncTaskFoodList(context,cartEntity,3).execute()
                 val success1=async.get()
                 if(success1) {
                     val favColor = ContextCompat.getColor(context, R.color.appColor)
