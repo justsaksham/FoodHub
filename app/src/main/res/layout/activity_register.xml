@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Acitivity.Register"
+    android:background="@color/appColor"
+    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:elevation="0dp"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@color/appColor"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+
+            app:layout_scrollFlags="scroll|enterAlways"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+<LinearLayout
+    android:id="@+id/llRegister"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    >
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:hint=" Name"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:id="@+id/etUserName"
+        android:drawableLeft="@drawable/name"
+
+        android:padding="9dp"
+        />
+    <EditText
+        android:padding="9dp"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:hint=" Email"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:drawableLeft="@drawable/email"
+        android:id="@+id/etUserEmail"
+        />
+    <EditText
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:textSize="18sp"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:textColor="#000"
+        android:hint=" Mobile Number"
+        android:drawableLeft="@drawable/phone"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:id="@+id/etUserNumber"
+        android:padding="9dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:hint=" Address"
+        android:drawableLeft="@drawable/address"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:id="@+id/etUserAddress"
+        android:padding="9dp"
+        />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:hint=" Password"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:id="@+id/etUserPassword"
+        android:drawableLeft="@drawable/password"
+        android:padding="9dp"
+        />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:drawableLeft="@drawable/password"
+        android:hint=" Confirm Password"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:id="@+id/etUserConfirmPass"
+        android:padding="9dp"
+        />
+</LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/llRegister"
+        android:padding="5dp"
+        android:background="#b71c1c"
+        android:id="@+id/btnRegister"
+        />
+
+</RelativeLayout>

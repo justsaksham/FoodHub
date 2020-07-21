@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/appColor"
+        >
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/username"
+             android:id="@+id/imgUserPic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            />
+        <LinearLayout
+            android:layout_below="@id/imgUserPic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUserName"
+        android:text="name"
+        android:background="#ffffff"
+        android:layout_margin="10dp"
+        android:textSize="25dp"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUserNumber"
+        android:text="name"
+        android:background="#ffffff"
+        android:layout_margin="10dp"
+        android:textSize="25dp"
+        android:padding="5dp"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUserEmailAddress"
+        android:text="name"
+        android:layout_margin="10dp"
+        android:textSize="25dp"
+        android:padding="5dp"
+
+        android:background="#ffffff"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUserAddress"
+        android:text="name"
+        android:background="#ffffff"
+        android:layout_margin="10dp"
+        android:textSize="25dp"
+        android:padding="5dp"
+
+        />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FoodHub</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="invalidName">Please Enter valid name</string>
+    <string name="invalid_number">Please enter valid number</string>
+    <string name="invalid_Email">Please enter valid email</string>
+    <string name="invalid_password">Please enter valid password</string>
+    <string name="invalid_confirm_password">Does not match</string>
+    <string name="invalid_otp">OTP must be of 4 digits</string>
+</resources>
