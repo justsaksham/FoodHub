@@ -88,7 +88,7 @@ class Welcome: AppCompatActivity() {
 //                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,
 //                        FavouriteFragment()
 //                    ).commit()
-                    openFragment(FavouriteFragment(),"Favourites")
+                    openFragment(FavouriteFragment(),"Favourite Restaurants")
                     drawerLayout.closeDrawers()
                 }
                R.id.itemFAQ ->{
@@ -187,4 +187,5 @@ class Welcome: AppCompatActivity() {
 //        //onStart()
         super.onRestart()
     }
+
 }

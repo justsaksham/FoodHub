@@ -5,23 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Acitivity.SplashActivity"
-    android:background="#ff5722"
+    android:background="#ffffff"
     >
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="190dp"
+        android:src="@drawable/cartoon"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/pandaBuddy"
+        />
+    <ImageView
+        android:layout_below="@id/pandaBuddy"
         android:layout_width="180dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:src="@drawable/logo"
         android:layout_centerInParent="true"
         android:id="@+id/ImgApplogo"
+        android:layout_marginTop="40dp"
         />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Food Hub"
-            android:textColor="#ffffff"
-            android:layout_below="@+id/ImgApplogo"
-            android:layout_centerInParent="true"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            />
+
 </RelativeLayout>

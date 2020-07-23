@@ -225,8 +225,7 @@ Once you've bought a promotion you can also instantly reserve your table. We'll 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-
+            android:layout_marginTop="20dp"
             >
             <LinearLayout
                 android:padding="10dp"
@@ -244,38 +243,6 @@ Once you've bought a promotion you can also instantly reserve your table. We'll 
                     android:layout_height="wrap_content"
 
                     android:text="Unfortunately some restaurants don't take bookings or haven't yet shifted to a digital booking system. Where possible we still list these restaurants onsite - we want Restaurant Hub to list as many of your favourite restaurants as possible. If you still can't find your favourite haunt please email us on info@restauranthub.co.nz and we promise to tell the restaurant customers like you need them to get with the program...! "
-                    />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-
-            >
-            <LinearLayout
-                android:padding="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Are there any limitations to my deal?"
-                    android:textColor="@color/appColor"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You can find our general Terms and Conditions elsewhere on this site.
-
-Promotions are often offered with general limitations. Examples of these include:
-
-• Your promotion will apply to a limited number of diners, and you cannot extend it to cover additional diners should your party be greater than the promotion offer
-
-• Your promotion must be redeemed before any stated expiry date. "
                     />
             </LinearLayout>
 

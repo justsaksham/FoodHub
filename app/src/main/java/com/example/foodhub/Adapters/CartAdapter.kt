@@ -23,7 +23,7 @@ class CartAdapter(val context: Context,val list:List<Object?> ):RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val food=list[position] as CartEntity?
-        holder.txtDishCost.text=food?.foodCost
+        holder.txtDishCost.text="Rs. ${food?.foodCost}"
         holder.txtDishName.text=food?.foodName
     }
 

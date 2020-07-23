@@ -52,7 +52,7 @@ class FoodItemList : AppCompatActivity() {
 
         val h=GetDBA.getDBAsyncTaskFoodList(this@FoodItemList,null,4).execute().get()
 
-        toolbar=findViewById(R.id.toolbar)
+        toolbar= findViewById(R.id.toolbar)
         layoutManager=LinearLayoutManager(this@FoodItemList)
         recyclerItems=findViewById(R.id.recyclerView)
         btnProceedCart=findViewById(R.id.btnProceedCart)
@@ -83,7 +83,7 @@ class FoodItemList : AppCompatActivity() {
 
 
 
-        Toast.makeText(this@FoodItemList,"saksham is $rest",Toast.LENGTH_LONG).show()
+
         setupToolbar()
         supportActionBar?.title=nameOfRes
 
@@ -105,6 +105,7 @@ class FoodItemList : AppCompatActivity() {
                 val insert=GetDBA.getDBAsyncTaskRestList(this@FoodItemList,rest,2).execute().get()
                 if(insert){
                     favNotRes1.visibility = View.VISIBLE
+                    Toast.makeText(this@FoodItemList,"Added As Favourite",Toast.LENGTH_SHORT).show()
                 }
                 else{
                     Toast.makeText(this@FoodItemList,"some error occured",Toast.LENGTH_LONG).show()
@@ -115,6 +116,7 @@ class FoodItemList : AppCompatActivity() {
                 val delete=GetDBA.getDBAsyncTaskRestList(this@FoodItemList,rest,3).execute().get()
                 if(delete){
                     favNotRes1.visibility = View.GONE
+                    Toast.makeText(this@FoodItemList,"Removed From Favourite",Toast.LENGTH_SHORT).show()
                 }
                 else{
                     Toast.makeText(this@FoodItemList,"some error occured",Toast.LENGTH_LONG).show()
@@ -168,11 +170,14 @@ class FoodItemList : AppCompatActivity() {
                     }
 
                 }, Response.ErrorListener {
-                    Toast.makeText(
-                        this@FoodItemList,
-                        "Volley error occured!!! $it",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    if(this@FoodItemList!=null){
+                        Toast.makeText(
+                            this@FoodItemList,
+                            "Volley error occured!!! $it",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                      }
 
                 }
 
@@ -187,14 +192,12 @@ class FoodItemList : AppCompatActivity() {
             queue.add(jsonObjectRequest)
         }
         catch(e:Exception){
-            if(this@FoodItemList!=null){
-                Toast.makeText(this@FoodItemList,"some error occured",Toast.LENGTH_LONG).show()
-            }
+            Toast.makeText(this@FoodItemList,"some error occured",Toast.LENGTH_LONG).show()
             //Toast.makeText(this@FoodItemList,"error ",Toast.LENGTH_LONG).show()
         }
 
         btnProceedCart.setOnClickListener {
-            Toast.makeText(this@FoodItemList,"cart ",Toast.LENGTH_LONG).show()
+           // Toast.makeText(this@FoodItemList,"cart ",Toast.LENGTH_LONG).show()
             val intent=Intent(this@FoodItemList,Cart::class.java)
             intent.putExtra("objectRestEntity",rest)
             startActivity(intent)

@@ -79,10 +79,10 @@ class MainActivity : AppCompatActivity() {
                         val jsonObjectRequest = object : JsonObjectRequest(
                             Request.Method.POST, url, jsonObject, Response.Listener {
 
-                                Toast.makeText(
-                                    this@MainActivity,
-                                    "saksham is here $it", Toast.LENGTH_LONG
-                                ).show()
+//                                Toast.makeText(
+//                                    this@MainActivity,
+//                                    "saksham is here $it", Toast.LENGTH_LONG
+//                                ).show()
                                 val data = it.getJSONObject("data")
                                 val success = data.getBoolean("success")
                                 if (success) {
@@ -105,12 +105,16 @@ class MainActivity : AppCompatActivity() {
                                     startActivity(intent)
                                     finish()
                                 } else {
+                                    val ss=data.getString("errorMessage")
+                                    Toast.makeText(this@MainActivity,"$ss",Toast.LENGTH_SHORT).show()
 
                                 }
 
                             }, Response.ErrorListener {
+
+                                if( this@MainActivity !=null)
                                 Toast.makeText(
-                                    this@MainActivity, "Volley Error Occured!!!!" +
+                                    this@MainActivity, "Server Error Occured!!!!" +
                                             "$it", Toast.LENGTH_LONG
                                 ).show()
 
@@ -126,7 +130,6 @@ class MainActivity : AppCompatActivity() {
                         queue.add(jsonObjectRequest)
 
                     } catch (e: Exception) {
-                        if (this@MainActivity != null)
                             Toast.makeText(
                                 this@MainActivity,
                                 "some unexpected error occured!!!!",
@@ -177,7 +180,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 
 
 }

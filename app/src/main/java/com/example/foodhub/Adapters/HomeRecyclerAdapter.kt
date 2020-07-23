@@ -37,7 +37,7 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
 
         val rest=ResList[position]
         holder.txtResName.text=rest.resName
-        holder.txtPriceRes.text=rest.resCost
+        holder.txtPriceRes.text="Rs.${rest.resCost} /person"
         holder.txtRatingRes.text=rest.resRating
         Picasso.get().load(rest.resImage).error(R.drawable.logo).into(holder.imgRes)
         val restName=RestEntity(
@@ -47,6 +47,13 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
             rest.resRating
             ,rest.resImage
         )
+
+
+
+
+
+
+
         holder.llRest.setOnClickListener {
          //   notifyItemChanged(position,holder.favNotRes1)
             Toast.makeText(context, "${rest.resName} Clicked ", Toast.LENGTH_LONG).show()
@@ -79,35 +86,11 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
 
         holder.favNotRes.setOnClickListener{
 
-
-//            var k=(act as Welcome).supportFragmentManager.findFragmentById(R.id.frameLayout)
-//            Toast.makeText(context,"vghchgcgc $k",Toast.LENGTH_LONG).show()
-//            (act as Welcome).supportFragmentManager.beginTransaction().detach(k!!).attach(k!!)
-//                .commit()
-
-//            when(k) {
-//                is HomeFragment -> {
-//                    Toast.makeText(context,"hhh $k",Toast.LENGTH_LONG).show()
-//                    (act as Welcome).supportFragmentManager.beginTransaction().detach(k).attach(k)
-//                        .commit()
-//                }
-//
-//                else -> {
-//                    Toast.makeText(context,"juuun $k",Toast.LENGTH_LONG).show()
-//                    (act as Welcome).supportFragmentManager.beginTransaction().detach(k).attach(k)
-//                        .commit()
-//
-//                }
-//            }
-
-
-
-
-
             if(!GetDBA.getDBAsyncTaskRestList(context,restName,1).execute().get()){
                val insert=GetDBA.getDBAsyncTaskRestList(context,restName,2).execute().get()
                if(insert){
                holder.favNotRes1.visibility = View.VISIBLE
+                   Toast.makeText(context,"Added As Favourite",Toast.LENGTH_SHORT).show()
                }
                else{
                    Toast.makeText(context,"some error occured",Toast.LENGTH_LONG).show()
@@ -118,6 +101,7 @@ class HomeRecyclerAdapter(val context:Context,val ResList:ArrayList<Restruant>) 
                val delete=GetDBA.getDBAsyncTaskRestList(context,restName,3).execute().get()
                if(delete){
                    holder.favNotRes1.visibility = View.GONE
+                   Toast.makeText(context,"Removed From Favourite",Toast.LENGTH_SHORT).show()
                }
                else{
                    Toast.makeText(context,"some error occured",Toast.LENGTH_LONG).show()

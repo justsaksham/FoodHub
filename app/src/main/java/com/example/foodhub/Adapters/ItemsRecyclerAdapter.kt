@@ -39,7 +39,7 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
         val food = ItemList[position]
         holder.txtDishName.text = food.foodName
         holder.txtDishId.text = food.foodId
-        holder.txtDishCost.text = food.foodCost
+        holder.txtDishCost.text ="Rs. ${food.foodCost}"
         val value: String = food.foodId
         val cartEntity=CartEntity(
             food.foodId.toInt(),
@@ -47,12 +47,15 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
             ,food.foodCost.toString()
             ,food.RestId.toString()
         )
+
+
+        //checking they are added in cart or not
         val async=GetDBA.getDBAsyncTaskFoodList(context,cartEntity,1).execute()
         val success2=async.get()
         if(success2){
             val favColor = ContextCompat.getColor(context, R.color.btnchanged)
             holder.btnAdd.setBackgroundColor(favColor)
-            holder.btnAdd.text = "Added"
+            holder.btnAdd.text = "Remove"
         }
         else{
             val favColor = ContextCompat.getColor(context, R.color.appColor)
@@ -65,7 +68,7 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
 
             val async=GetDBA.getDBAsyncTaskFoodList(context,cartEntity,1).execute()
             val success=async.get()
-            Toast.makeText(context, "clicked $success", Toast.LENGTH_LONG).show()
+           // Toast.makeText(context, "clicked $success", Toast.LENGTH_LONG).show()
             if (!success) {
                 listOfCartItem.add(food)
                 listOfItemId.add(value)
@@ -74,11 +77,11 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
                 if(success1) {
                     val favColor = ContextCompat.getColor(context, R.color.btnchanged)
                     holder.btnAdd.setBackgroundColor(favColor)
-                    holder.btnAdd.text = "Added"
-                   // Toast.makeText(context, "clicked $listOfCartItem", Toast.LENGTH_LONG).show()
+                    holder.btnAdd.text = "Remove"
+                  //  Toast.makeText(context, " Added in cart", Toast.LENGTH_LONG).show()
                 }
                 else{
-                    Toast.makeText(context, "error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, " some unexpected error", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 listOfCartItem.remove(food)
@@ -88,9 +91,10 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
                 if(success1) {
                     val favColor = ContextCompat.getColor(context, R.color.appColor)
                     holder.btnAdd.setBackgroundColor(favColor)
+                    Toast.makeText(context, " Removed From cart", Toast.LENGTH_SHORT).show()
                     holder.btnAdd.text = "Add"
                 }else{
-                    Toast.makeText(context, "error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Some unexpected error", Toast.LENGTH_LONG).show()
                 }
             }
             if (!listOfCartItem.isEmpty())
@@ -111,43 +115,4 @@ class ItemsRecyclerAdapter(val context:Context,val ItemList:ArrayList<Food>,val 
      fun getter():ArrayList<Food>{
         return listOfCartItem
     }
-//    class DBAsyncTask(val context:Context, val CartEntity: CartEntity?,val mode:Int):
-//        AsyncTask<Void, Void, Boolean>(){
-//        /*
-//        mode 1 -> check DB if the book is favourites or not
-//        mode 2 -> Save the book into DB as favourites
-//        mode 3 -> Remove the Favourite the book
-//         */
-//        val db= Room.databaseBuilder(context, CartDatabase::class.java,"carts-db").build()
-//        override fun doInBackground(vararg params: Void?): Boolean {
-//            when(mode){
-//                1 ->{
-//                    // check DB if the book is favourites or not
-//                    val book: CartEntity?= db.cartDao().getFoodById(CartEntity?.food_id.toString())
-//                    db.close()
-//                    return book!=null
-//
-//                }
-//                2 ->{
-//                    //Save the book into DB as favourites
-//                    db.cartDao().insertFood(CartEntity)
-//                    db.close()
-//                    return true
-//                }
-//                3 ->{
-//                    ///Remove the Favourite the book\
-//                    db.cartDao().deleteFood(CartEntity)
-//                    db.close()
-//                    return true
-//                }
-//                4 ->{
-//                    db.cartDao().deleteAll()
-//                    db.close()
-//                    return true
-//              }
-//            }
-//            return false;
-//        }
-//
-//    }
 }

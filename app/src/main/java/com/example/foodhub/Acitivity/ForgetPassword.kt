@@ -61,15 +61,51 @@ class ForgetPassword : AppCompatActivity() {
                                 val success = itemsOfRes.getBoolean("success")
                                 if (success) {
                                     val first = itemsOfRes.getBoolean("first_try")
-                                    val intent = Intent(this@ForgetPassword, Otp::class.java)
-                                    intent.putExtra("number", etUserNumber.text.toString())
-                                    startActivity(intent)
+                                    if(first){
+                                        val dialog = AlertDialog.Builder(this@ForgetPassword)
+                                        dialog.setTitle("Information")
+                                        dialog.setMessage("Kindly refer to the email for the OTP")
+                                        dialog.setPositiveButton("OK")
+                                        { text, listener ->
+                                            val intent = Intent(this@ForgetPassword, Otp::class.java)
+                                            intent.putExtra("number", etUserNumber.text.toString())
+                                            startActivity(intent)
+                                            finish()
+                                        }
+                                        dialog.create()
+                                        dialog.show()
+                                      //  Toast.makeText(this@ForgetPassword,"please check mail for otp",Toast.LENGTH_SHORT).show()
+                                    }
+                                    else{
+                                        val dialog = AlertDialog.Builder(this@ForgetPassword)
+                                        dialog.setTitle("Information")
+                                        dialog.setMessage("Kindly refer to the previous email for the OTP")
+                                        dialog.setPositiveButton("OK")
+                                        { text, listener ->
+                                            val intent = Intent(this@ForgetPassword, Otp::class.java)
+                                            intent.putExtra("number", etUserNumber.text.toString())
+                                            startActivity(intent)
+                                            finish()
+                                        }
+                                        dialog.create()
+                                        dialog.show()
+                                       // Toast.makeText(this@ForgetPassword,"please check previous mail for otp",Toast.LENGTH_SHORT).show()
+                                    }
+                                    }else{
+                                    val errorMessage=itemsOfRes.getString("errorMessage")
+                                    Toast.makeText(
+                                        this@ForgetPassword,
+                                        "$errorMessage",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+
                                 }
 
                             }, Response.ErrorListener {
+                                if (this@ForgetPassword != null)
                                 Toast.makeText(
                                     this@ForgetPassword,
-                                    "Volley error occured!!! $it",
+                                    "server error occured!!!",
                                     Toast.LENGTH_LONG
                                 ).show()
 
@@ -85,8 +121,8 @@ class ForgetPassword : AppCompatActivity() {
                         }
                         queue.add(jsonObjectRequest)
                     } catch (e: Exception) {
-                        if (this@ForgetPassword != null)
-                            Toast.makeText(this@ForgetPassword, "error ", Toast.LENGTH_LONG).show()
+
+                            Toast.makeText(this@ForgetPassword, "some error occured ", Toast.LENGTH_LONG).show()
                     }
 
                 }else{

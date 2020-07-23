@@ -3,24 +3,31 @@
     <group android:checkableBehavior="single">
 <item android:id="@+id/itemHome"
     android:title="Home"
+    android:icon="@drawable/ic_action_address_logo"
     />
     <item android:id="@+id/itemMyProfile"
         android:title="My Profile"
+        android:icon="@drawable/ic_action_name_logo"
 
         />
     <item android:id="@+id/itemFav"
         android:title="Favourites Restraunts"
+        android:icon="@drawable/ic_action_favnotres"
 
         />
     <item android:id="@+id/itemOrderHistroy"
         android:title="Order Histroy"
+        android:icon="@drawable/ic_action_histroy_logo"
+
 
         />
     <item android:id="@+id/itemFAQ"
         android:title="FAQ"
+        android:icon="@drawable/ic_action_faq_logo"
         />
     <item android:id="@+id/itemLogout"
         android:title="Logout"
+        android:icon="@drawable/ic_action_logout_logo"
 
         />
     </group>

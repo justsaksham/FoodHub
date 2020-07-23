@@ -114,17 +114,20 @@ class Register : AppCompatActivity() {
                                         ).apply()
                                         sharedPreferences.edit()
                                             .putString("address", d.getString("address")).apply()
-
+                                        Toast.makeText(this@Register,"Registered Successfully",Toast.LENGTH_SHORT).show()
                                         val intent = Intent(this@Register, Welcome::class.java)
                                         startActivity(intent)
                                         finish()
                                     } else {
-                                        etUserNumber.error = "enter valid name"
-                                        Toast.makeText(this@Register, "$it", Toast.LENGTH_LONG)
+                                        val msg = res.getString("errorMessage")
+                                        Toast.makeText(this@Register, "$msg", Toast.LENGTH_LONG)
                                             .show()
                                     }
                                 },
                                 Response.ErrorListener {
+                                    if (this@Register != null)
+                                    Toast.makeText(this@Register, "Server Error Occured", Toast.LENGTH_LONG)
+                                        .show()
 
                                 }) {
                             override fun getHeaders(): MutableMap<String, String> {
@@ -136,8 +139,8 @@ class Register : AppCompatActivity() {
                         }
                         queue.add(jsonObjectRequest)
                     } catch (e: Exception) {
-                        if (this@Register != null)
-                            Toast.makeText(this@Register, "error ", Toast.LENGTH_LONG).show()
+
+                            Toast.makeText(this@Register, "Some unexpected error ", Toast.LENGTH_LONG).show()
 
                     }
                 }else{
@@ -168,7 +171,7 @@ class Register : AppCompatActivity() {
     }
     fun setupToolbar(){
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Register"
+        supportActionBar?.title = "Register Yourself"
         supportActionBar?.setHomeButtonEnabled(true)
         //this will enable the home buttton make it active
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

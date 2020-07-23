@@ -45,7 +45,7 @@
         android:textStyle="bold"
         android:layout_margin="5dp"
         android:id="@+id/etUserName"
-        android:drawableLeft="@drawable/name"
+        android:drawableLeft="@drawable/ic_action_name_logo"
 
         android:padding="9dp"
         />
@@ -57,10 +57,10 @@
         android:background="#ffffff"
         android:textSize="18sp"
         android:textColor="#000"
-        android:hint=" Email"
+        android:hint=" Email Address"
         android:textStyle="bold"
         android:layout_margin="5dp"
-        android:drawableLeft="@drawable/email"
+        android:drawableLeft="@drawable/ic_action_email_logo"
         android:id="@+id/etUserEmail"
         />
     <EditText
@@ -72,8 +72,8 @@
         android:maxLength="10"
         android:maxLines="1"
         android:textColor="#000"
-        android:hint=" Mobile Number"
-        android:drawableLeft="@drawable/phone"
+        android:hint=" Mobile Number(10 digits)"
+        android:drawableLeft="@drawable/ic_action_phone_logo"
         android:textStyle="bold"
         android:layout_margin="5dp"
         android:id="@+id/etUserNumber"
@@ -85,8 +85,8 @@
         android:background="#ffffff"
         android:textSize="18sp"
         android:textColor="#000"
-        android:hint=" Address"
-        android:drawableLeft="@drawable/address"
+        android:hint=" Delivery Address"
+        android:drawableLeft="@drawable/ic_action_address_logo"
         android:textStyle="bold"
         android:layout_margin="5dp"
         android:id="@+id/etUserAddress"
@@ -99,11 +99,11 @@
         android:background="#ffffff"
         android:textSize="18sp"
         android:textColor="#000"
-        android:hint=" Password"
+        android:hint=" Password(Min.4 character)"
         android:textStyle="bold"
         android:layout_margin="5dp"
         android:id="@+id/etUserPassword"
-        android:drawableLeft="@drawable/password"
+        android:drawableLeft="@drawable/ic_action_password"
         android:padding="9dp"
         />
     <EditText
@@ -113,7 +113,7 @@
         android:background="#ffffff"
         android:textSize="18sp"
         android:textColor="#000"
-        android:drawableLeft="@drawable/password"
+        android:drawableLeft="@drawable/ic_action_password"
         android:hint=" Confirm Password"
         android:textStyle="bold"
         android:layout_margin="5dp"
@@ -130,7 +130,7 @@
         android:layout_marginTop="15dp"
         android:layout_below="@id/llRegister"
         android:padding="5dp"
-        android:background="#b71c1c"
+        android:background="#000000"
         android:id="@+id/btnRegister"
         />
 

@@ -1,8 +1,13 @@
 package com.example.foodhub.Fragment
 
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +16,8 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -39,6 +46,7 @@ class HistoryFragment(val id:String) : Fragment() {
     lateinit var histroyAdapter:HistroyAdapter
     lateinit var progressLayout: RelativeLayout
     lateinit var progressBar: ProgressBar
+    lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var gone: TextView
     lateinit var list:ArrayList<Histroy>
     override fun onCreateView(
@@ -65,7 +73,6 @@ class HistoryFragment(val id:String) : Fragment() {
 
                 val jsonObjectRequest=object:JsonObjectRequest(
                     Request.Method.GET,url,null, Response.Listener {
-                        Toast.makeText(activity as Context,"saksham $it",Toast.LENGTH_LONG).show()
 
                         val data=it.getJSONObject("data")
 
@@ -80,7 +87,7 @@ class HistoryFragment(val id:String) : Fragment() {
 
                             for(i in 0  until dataArray.length()){
 
-                                gone.visibility=View.VISIBLE
+                                gone.visibility=View.GONE
                                 val obj=dataArray.getJSONObject(i)
                                 val food=obj.getJSONArray("food_items")
                                 val foodList:ArrayList<FoodList> = arrayListOf()
@@ -107,16 +114,26 @@ class HistoryFragment(val id:String) : Fragment() {
 
                                 )
                                 list.add(histroy)
+                                layoutManager =LinearLayoutManager(activity)
                                 histroyAdapter=getAdapter.getHistroyAdapter(activity as Context,list)
+//                               val dec=recyclerView.addItemDecoration(DividerItemDecoration
+//                                   (
+//                                   recyclerView.context,
+//                                   (layoutManager as LinearLayoutManager)
+//                                       .orientation
+//                               )
+//                               )
+
                                 recyclerView.adapter=histroyAdapter
                                 recyclerView.layoutManager=LinearLayoutManager(activity)
+
                             }
                         }
                         else{
                             Toast.makeText(context,"some unexpected error occured",Toast.LENGTH_LONG).show()
                         }
                     },Response.ErrorListener {
-
+                        if(activity as Context!=null)
                         Toast.makeText(context,"server error occured",Toast.LENGTH_LONG).show()
                     }
                 ){
@@ -130,14 +147,31 @@ class HistoryFragment(val id:String) : Fragment() {
                 }
                 queue.add(jsonObjectRequest)
             }catch(e:Exception){
-                if(activity as Context!=null)
-                    Toast.makeText(activity as Context, "error ", Toast.LENGTH_LONG).show()
+
+                    Toast.makeText(activity as Context, " some unexpected error ", Toast.LENGTH_LONG).show()
 
             }
 
         }
         else{
             //dialog box
+            val dialog  = AlertDialog.Builder(activity as Context)
+            dialog.setTitle("error")
+            dialog.setMessage("internet conn is not found")
+            dialog.setPositiveButton("open Settings"){
+                    text,listener ->
+                val settingsIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                startActivity(settingsIntent)
+                activity?.finish()
+            }
+            dialog.setNegativeButton("Exit"){
+                    text,listener ->
+                ActivityCompat.finishAffinity(activity as Activity)
+
+            }
+            dialog.create()
+            dialog.show()
+
         }
 
         return view

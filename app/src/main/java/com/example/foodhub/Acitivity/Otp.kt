@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Patterns
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.android.volley.Request
 import com.android.volley.Response
@@ -27,6 +29,7 @@ class Otp : AppCompatActivity() {
         lateinit var etUserNewPassword:EditText
         lateinit var etUserConfirmPass:EditText
         lateinit var btnSubmit:Button
+        lateinit var toolbar:Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otp)
@@ -35,23 +38,29 @@ class Otp : AppCompatActivity() {
         etUserNewPassword=findViewById(R.id.etUserNewPassword)
         etUserConfirmPass=findViewById(R.id.etUserConfirmPass)
         btnSubmit=findViewById(R.id.btnSubmit)
+        toolbar=findViewById(R.id.toolbar)
+
+
+        var validator : AwesomeValidation = AwesomeValidation(ValidationStyle.BASIC)
+
+
+        validator.addValidation(this,R.id.etUserotp,".{4}",R.string.invalid_otp)
+        //for passsword
+        validator.addValidation(this,R.id.etUserNewPassword,".{4,}",R.string.invalid_password)
+        // validation
+
+        validator.addValidation(this,R.id.etUserConfirmPass,R.id.etUserNewPassword,R.string.invalid_confirm_password)
+
+
+
+
+
+
+        setupToolbar()
         btnSubmit.setOnClickListener{
            //  fun CharSequence?.isValidEmail()=!isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(etUserConfirmPass.text).matches()
 
             val jsonObject=JSONObject()
-
-
-            var validator : AwesomeValidation = AwesomeValidation(ValidationStyle.BASIC)
-
-
-                validator.addValidation(this,R.id.etUserotp,".{4}",R.string.invalid_otp)
-            //for passsword
-            validator.addValidation(this,R.id.etUserPassword,".{4,}",R.string.invalid_password)
-            // validation
-
-            validator.addValidation(this,R.id.etUserConfirmPass,R.id.etUserPassword,R.string.invalid_confirm_password)
-
-
 
 
 
@@ -70,7 +79,7 @@ class Otp : AppCompatActivity() {
 
 
 
-            jsonObject.put("mobile_number",number.toString())
+            jsonObject.put("mobile_number",number?.toString())
             jsonObject.put("password",etUserNewPassword.text.toString())
             jsonObject.put("otp",etUserotp.text.toString())
             if(ConnectionManager().checkConnectivity(this@Otp)) {
@@ -87,9 +96,8 @@ class Otp : AppCompatActivity() {
                                 Response.Listener {
                                     val data = it.getJSONObject("data")
                                     val success = data.getBoolean("success")
-                                    val message = data.getString("successMessage")
                                     if (success) {
-
+                                        val message = data.getString("successMessage")
                                         Toast.makeText(this@Otp, "$message", Toast.LENGTH_LONG)
                                             .show()
                                         val intent = Intent(this@Otp, MainActivity::class.java)
@@ -97,12 +105,15 @@ class Otp : AppCompatActivity() {
                                         finishAffinity()
 
                                     } else {
+                                        val message = data.getString("errorMessage")
+
                                         Toast.makeText(this@Otp, "$message", Toast.LENGTH_LONG)
                                             .show()
                                     }
                                 },
                                 Response.ErrorListener {
-                                    Toast.makeText(this@Otp, "$it", Toast.LENGTH_LONG).show()
+                                    if (this@Otp != null)
+                                    Toast.makeText(this@Otp, "server error occured", Toast.LENGTH_LONG).show()
                                 }) {
                             override fun getHeaders(): MutableMap<String, String> {
                                 var headers = HashMap<String, String>()
@@ -113,8 +124,7 @@ class Otp : AppCompatActivity() {
                         }
                         queue.add(jsonObjectRequest)
                     } catch (e: Exception) {
-                        if (this@Otp != null)
-                            Toast.makeText(this@Otp, "error ", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@Otp, "some error occured", Toast.LENGTH_LONG).show()
 
                     }
                 }else{
@@ -144,4 +154,17 @@ class Otp : AppCompatActivity() {
 
         }
     }
+    fun setupToolbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Enter the received otp below"
+        supportActionBar?.setHomeButtonEnabled(true)
+        //this will enable the home buttton make it active
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressed()
+        return super.onOptionsItemSelected(item)
+    }
+
 }

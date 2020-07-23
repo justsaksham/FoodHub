@@ -12,16 +12,51 @@
         android:networkSecurityConfig="@xml/network_secure_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:resizeableActivity="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".Acitivity.OrderConfirm"></activity>
-        <activity android:name=".Acitivity.Cart" />
-        <activity android:name=".Acitivity.FoodItemList" />
-        <activity android:name=".Acitivity.Welcome" />
-        <activity android:name=".Acitivity.Otp" />
-        <activity android:name=".Acitivity.ForgetPassword" />
-        <activity android:name=".Acitivity.Register" />
-        <activity android:name=".Acitivity.MainActivity" />
-        <activity android:name=".Acitivity.SplashActivity">
+        <activity android:name=".Acitivity.OrderConfirm"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+            ></activity>
+        <activity android:name=".Acitivity.Cart"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+            />
+        <activity android:name=".Acitivity.FoodItemList"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+
+            />
+        <activity android:name=".Acitivity.Welcome"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+            />
+        <activity android:name=".Acitivity.Otp"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+            />
+        <activity android:name=".Acitivity.ForgetPassword"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+
+
+            />
+        <activity android:name=".Acitivity.Register"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+
+            />
+        <activity android:name=".Acitivity.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+
+            />
+
+        <activity android:name=".Acitivity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

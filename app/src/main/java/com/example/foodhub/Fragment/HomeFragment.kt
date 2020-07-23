@@ -120,12 +120,13 @@ class HomeFragment() : Fragment() {
                             ).show()
                         }
                     } catch (e: JSONException) {
-                       if(activity as Context!=null)
-                       Toast.makeText(activity as Context,"some unexpected error occure $e",Toast.LENGTH_LONG).show()
+
+                       Toast.makeText(activity as Context,"some unexpected error occured",Toast.LENGTH_LONG).show()
                     }
                 }, Response.ErrorListener {
-                    print("response is $it")
-                    Toast.makeText(activity as Context, "errors $it", Toast.LENGTH_LONG).show()
+                   // print("response is $it")
+                    if(activity as Context!=null)
+                    Toast.makeText(activity as Context, "server error occured", Toast.LENGTH_LONG).show()
                 }
             ) {
                 override fun getHeaders(): MutableMap<String, String> {

@@ -90,7 +90,7 @@ class Cart : AppCompatActivity() {
 
 
 
-      btnOrder.text="total value($sum)"
+      btnOrder.text="total value Rs ($sum)"
 
 
 
@@ -118,21 +118,25 @@ class Cart : AppCompatActivity() {
                         val data=it.getJSONObject("data")
                         val success=data.getBoolean("success")
                         if(success){
-                            Toast.makeText(this@Cart,"$it",Toast.LENGTH_LONG).show()
                             val intent = Intent(this@Cart, OrderConfirm::class.java)
                             startActivity(intent)
                             finish()
                         }
                         else{
-                            Toast.makeText(this@Cart,"some error occured $it",Toast.LENGTH_LONG).show()
+                            val errorMessage=data.getString("errorMessage")
+                            Toast.makeText(this@Cart,"$errorMessage",Toast.LENGTH_LONG).show()
                         }
 
                     }, Response.ErrorListener {
-                        Toast.makeText(
-                            this@Cart,
-                            "some unExcepted Error occured!!! $it",
-                            Toast.LENGTH_LONG
-                        ).show()
+
+                        if(this@Cart!=null){
+                            Toast.makeText(
+                                this@Cart,
+                                "some server Error occured!!!",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            }
+
                     }
                 ) {
                     override fun getHeaders(): MutableMap<String, String> {
@@ -146,9 +150,8 @@ class Cart : AppCompatActivity() {
 
 
             } catch (e: Exception) {
-                    if(this@Cart!=null){
-                        Toast.makeText(this@Cart,"some error occured",Toast.LENGTH_LONG).show()
-                    }
+                Toast.makeText(this@Cart,"some error occured",Toast.LENGTH_LONG).show()
+
             }
         }else{
             //dailog lagana h

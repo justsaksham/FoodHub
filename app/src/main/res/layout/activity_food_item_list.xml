@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Acitivity.FoodItemList">
+
 <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,9 +64,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/txtText"
         android:id="@+id/recyclerView"
+
         >
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -79,6 +81,7 @@
         android:text="Proceed To Cart"
         android:id="@+id/btnProceedCart"
         />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -92,5 +95,4 @@
             android:layout_centerInParent="true"
             />
     </RelativeLayout>
-
 </RelativeLayout>
