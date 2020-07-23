@@ -27,7 +27,7 @@ class HistroyListAdapter(val context: Context, val list:ArrayList<FoodList>): Re
 
     override fun onBindViewHolder(holder: HistroyListAdapter.HistroyListViewHolder, position: Int) {
         val food=list[position] as FoodList
-        holder.txtDishCost.text=food.foodCost
+        holder.txtDishCost.text="Rs.${food.foodCost}"
         holder.txtDishName.text=food.foodName
     }
         class HistroyListViewHolder(view: View):RecyclerView.ViewHolder(view){

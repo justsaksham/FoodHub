@@ -61,7 +61,6 @@ class ForgetPassword : AppCompatActivity() {
                                 val success = itemsOfRes.getBoolean("success")
                                 if (success) {
                                     val first = itemsOfRes.getBoolean("first_try")
-                                    if(first){
                                         val dialog = AlertDialog.Builder(this@ForgetPassword)
                                         dialog.setTitle("Information")
                                         dialog.setMessage("Kindly refer to the email for the OTP")
@@ -75,22 +74,7 @@ class ForgetPassword : AppCompatActivity() {
                                         dialog.create()
                                         dialog.show()
                                       //  Toast.makeText(this@ForgetPassword,"please check mail for otp",Toast.LENGTH_SHORT).show()
-                                    }
-                                    else{
-                                        val dialog = AlertDialog.Builder(this@ForgetPassword)
-                                        dialog.setTitle("Information")
-                                        dialog.setMessage("Kindly refer to the previous email for the OTP")
-                                        dialog.setPositiveButton("OK")
-                                        { text, listener ->
-                                            val intent = Intent(this@ForgetPassword, Otp::class.java)
-                                            intent.putExtra("number", etUserNumber.text.toString())
-                                            startActivity(intent)
-                                            finish()
-                                        }
-                                        dialog.create()
-                                        dialog.show()
-                                       // Toast.makeText(this@ForgetPassword,"please check previous mail for otp",Toast.LENGTH_SHORT).show()
-                                    }
+
                                     }else{
                                     val errorMessage=itemsOfRes.getString("errorMessage")
                                     Toast.makeText(
